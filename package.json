@@ -1,0 +1,25 @@
+{
+  "name": "dumbo-web",
+  "version": "1.0.0",
+  "description": "Addressing the elephant in the room",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "speech",
+    "sentiment",
+    "analysis",
+    "gender",
+    "social",
+    "justice",
+    "lgbtq"
+  ],
+  "author": "connecthedots",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "ejs": "^2.5.7",
+    "express": "^4.16.2"
+  }
+}
