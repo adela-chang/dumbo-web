@@ -1,9 +1,37 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Dumbo App</title>
-</head>
-<body>
-	<h1>Addressing the elephant in the room</h1>
-</body>
-</html>
+<%- include partials/top %>
+        <!-- Top content -->
+        <div class="top-content">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12 text">
+                        <h1>Make your recording here</h1>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-6 col-md-offset-3">
+                                    <form action="/viewdetail" method="GET">
+                                        <div id="searchbar" class="input-group input-group-lg">
+                                            <input type="file" accept="image/*;capture=camera"class="form-control" name="lemonId" placeholder="Go ahead, say something. " required= "true">
+                                            <span class="input-group-btn">
+                                                <input class="btn btn-success btn-default" type="submit" value="Record!">
+                                            </span>
+                                        </div>
+                                        <!-- /input-group -->                        
+                                    </form>
+                                </div>
+                                <!-- /.col-lg-6 -->
+                            </div>
+                            <!-- /.row -->
+                        </div>                     
+                        
+                        
+                        <div class="description">
+                        	<p class="medium-paragraph">
+                         	Some type of descriptive text will go here
+                        	</p>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+<%- include partials/bottom %>
