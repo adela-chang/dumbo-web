@@ -3,7 +3,7 @@ jQuery(document).ready(function() {
     /*
         Background slideshow
     */
-    $('.top-content').backstretch("/assets/elephant.jpg");
+    $('.top-content').backstretch("/assets/banner.png");
 
     /*
         Search form

@@ -6,6 +6,7 @@
                     <div class="col-sm-12 text">
                 		<h1>Addressing the elephant in the room</h1>
                         <h2>Make your recording here</h2>
+
                         <button class="btn btn-lg btn-success" onclick="startRecording(this);">Record</button>
                         <button class="btn btn-lg btn-danger" onclick="stopRecording(this);" disabled>Stop</button>
 						
@@ -14,6 +15,13 @@
 
 						<h3>Current Log Screen</h3>
 						<pre id="log" class="well"></pre>
+
+						<div class="well" style="color:#000;">Sentiment Analysis
+							<p id="sentiment"></p>
+							<ul class="show">
+								
+							</ul>	
+						</div>
 
 						<!-- Recording script -->
 						<script type="text/javascript">
@@ -48,22 +56,14 @@
 						        button.previousElementSibling.disabled = false;
 						        __log('Stopped recording.');
 
-						        // create WAV download link using audio data blob
-						        createDownloadLink();
-
+						        // runs sentiment analysis of audio data blob
+						        checkSentiment();
 						        recorder.clear();
 						    }
 
-						    function createDownloadLink() {
+						    function checkSentiment() {
 						        recorder && recorder.exportWAV(function(blob) {
-
 						            console.log(blob)
-
-									// var fd = new FormData();
-									// fd.append('fname', 'test.wav');
-									// fd.append('data', blob);
-									// console.log(fd);
-
 									$.ajax({
 									    type: 'POST',
 									    url: 'http://52.90.98.146:9000/send',
@@ -72,8 +72,34 @@
 									    contentType: false
 									}).done(function(data) {
 									       console.log(data);
-									});
+									       var femaleIn = data.female_in
+									       var maleIn = data.male_in
+									       var compound = data.sentiment_compound
+									       var negative = data.sentiment_neg
+									       var neutral = data.sentiment_neu
+									       var positive = data.sentiment_pos
 
+									       var show = document.querySelector(".show");
+									       var sentiment = document.querySelector("#sentiment");      
+									       var child = document.createElement("li");
+
+									       if (compound > 0) {
+									       		sentiment.innerHTML = "POSITIVE";
+										       	child.innerHTML += "<li> Male: " + maleIn + "</li>" + 
+										       	"<li> Female: " + femaleIn + "</li>"
+										       show.appendChild(child)
+									       } else if (compound<0){
+									       		sentiment.innerHTML = "NEGATIVE";
+										       	child.innerHTML += "<li> Male: " + maleIn + "</li>" + 
+										       	"<li> Female: " + femaleIn + "</li>"
+										       show.appendChild(child)
+									       } else{
+									       		sentiment.innerHTML = "NEUTRAL";
+										       	child.innerHTML += "<li> Male: " + maleIn + "</li>" + 
+										       	"<li> Female: " + femaleIn + "</li>"
+										       show.appendChild(child);
+									       }     
+									});
 						        });
 						    }
 
