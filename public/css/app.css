@@ -15,6 +15,11 @@ body {
     text-align: center;
 }
 
+h2, h3{
+	color:#fff;
+	font-family: Lato;
+}
+
 strong { font-weight: 500; }
 
 a, a:hover, a:focus {
@@ -22,8 +27,8 @@ a, a:hover, a:focus {
     -o-transition: all .3s; -moz-transition: all .3s; -webkit-transition: all .3s; -ms-transition: all .3s; transition: all .3s;
 }
 
-h1, h2 { margin-top: 10px; font-size: 38px; font-weight: 100; color: #555; line-height: 50px; }
-h3 { font-size: 22px; font-weight: 300; color: #555; line-height: 30px; }
+h1, h2 { margin-top: 10px; font-size: 38px; font-weight: 100; color: #fff; line-height: 50px; }
+h3 { font-size: 22px; font-weight: 300; color: #fff; line-height: 30px; }
 
 img { max-width: 100%; }
 
@@ -60,8 +65,9 @@ ul.navbar-nav { font-size: 16px; color: #fff; }
 .navbar-inverse ul.navbar-nav li a:focus { color: #64ca87; outline: 0; }
 
 .navbar-brand {
-	width: 95px;
-	background: url(../img/logo.png) left center no-repeat;
+	width: 100px;
+	background: url(../assets/dumbo100px.png) left center no-repeat;
+	background-size: 50px;
 	text-indent: -99999px;
 }
 .navbar>.container .navbar-brand { margin-left: 0; }
@@ -168,6 +174,6 @@ footer { padding: 40px 0 45px 0; background: #f8f8f8; }
 }
 	
 	/* logo */
-    .navbar-brand {
-    	background-image: url(../assets/logo.jpg) !important; background-repeat: no-repeat !important; background-size: 35px 34px !important;
-    }
+/*    .navbar-brand {
+    	background-image: url(../assets/dumbo100px.png) !important; background-repeat: no-repeat !important; background-size: 100px 100px !important;
+    }*/
