@@ -121,6 +121,9 @@ ul.navbar-nav { font-size: 16px; color: #fff; }
 	max-width: 100px;
 }
 
+#recordingslist li{
+	list-style: none;
+}
 /***** Log Items *****/
 pre{
 	border:none;

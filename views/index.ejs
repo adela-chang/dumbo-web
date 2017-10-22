@@ -33,7 +33,7 @@
 						        	<%-include gauge.html%>
 								<ul class="show"></ul>	
 							</div>
-
+							<!-- Download -->
 							<div>
 								<h2>Download your recordings</h2>
 								<ul id="recordingslist"></ul>
@@ -64,7 +64,6 @@
 						        recorder && recorder.record();
 						        button.disabled = true;
 						        button.nextElementSibling.disabled = false;
-						        button.nextElementSibling.display = block;
 						        __log('Recording...');
 						    }
 
@@ -81,6 +80,19 @@
 
 						    function checkSentiment() {
 						        recorder && recorder.exportWAV(function(blob) {
+									var url = URL.createObjectURL(blob);
+									var li = document.createElement('li');
+									var au = document.createElement('audio');
+									var hf = document.createElement('a');
+
+									au.controls = true;
+									au.src = url;
+									hf.href = url;
+									hf.download = new Date().toISOString() + '.wav';
+									hf.innerHTML = hf.download;
+									li.appendChild(au);
+									li.appendChild(hf);
+									recordingslist.appendChild(li);						        	
 						            console.log(blob)
 									$.ajax({
 									    type: 'POST',
@@ -99,23 +111,41 @@
 
 									       var show = document.querySelector(".show");
 									       var sentiment = document.querySelector("#sentiment");  
-									       var child = document.createElement("li");
+									       var child = document.createElement("p");
 									       var gauge = document.querySelector(".needle")
+									       var degree = compound*100;
 									       if (compound > 0) {
 									       		sentiment.innerHTML = "POSITIVE";
-									       		gauge.style.
-										       	child.innerHTML += "<li> Male: " + maleIn + "</li>" + 
-										       	"<li> Female: " + femaleIn + "</li>"
+									       		gauge.style.transform = "rotate("+degree+"deg)"
+									       		if (maleIn || femaleIn){
+									       			child.innerHTML = "Careful, this speech has gendered content."
+									       			child.style.color = "red";			
+									       		} else {
+									       			child.innerHTML = "Your speech does not have gendered content."
+									       			child.style.color = "green"
+									       		}
 										       show.appendChild(child)
 									       } else if (compound<0){
 									       		sentiment.innerHTML = "NEGATIVE";
-										       	child.innerHTML += "<li> Male: " + maleIn + "</li>" + 
-										       	"<li> Female: " + femaleIn + "</li>"
+									       		gauge.style.transform = "rotate("+degree+"deg)"
+									       		if (maleIn || femaleIn){
+									       			child.innerHTML = "Careful, this speech has gendered content."
+									       			child.style.color = "red";			
+									       		} else {
+									       			child.innerHTML = "Your speech does not have gendered content."
+									       			child.style.color = "green"
+									       		}
 										       show.appendChild(child)
 									       } else{
 									       		sentiment.innerHTML = "NEUTRAL";
-										       	child.innerHTML += "<li> Male: " + maleIn + "</li>" + 
-										       	"<li> Female: " + femaleIn + "</li>"
+									       		gauge.style.transform = "rotate("+degree+"deg)"
+									       		if (maleIn || femaleIn){
+									       			child.innerHTML = "Careful, this speech has gendered content."
+									       			child.style.color = "red";			
+									       		} else {
+									       			child.innerHTML = "Your speech does not have gendered content."
+									       			child.style.color = "green"
+									       		}
 										       show.appendChild(child);
 									       }
 									});
