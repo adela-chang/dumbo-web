@@ -3,25 +3,42 @@
         <div class="top-content">
             <div class="container">
                 <div class="row">
+                <h1 id="main-banner">Addressing the elephant in the room</h1>
+                	<img src="/assets/banner.png">
                     <div class="col-sm-12 text">
-                		<h1>Addressing the elephant in the room</h1>
-                        <h2>Make your recording here</h2>
+	                    <div class="jumbotron">                  
+	                    	<!-- Log Screen -->
+							<div class="panel panel-info">
+							  	<div class="panel-heading">Plugged in and ready to record</div>
+							    <pre id="log"></pre>
+							</div>	  
+							<!-- Make Recordings -->
+							<div>
+		                    	<div>
+		                    		<img class="img-circle" src="/assets/microphone.png">
+		                    	</div>
+		                        <h2 class="page-header">Start recording</h2>
+		                        <button class="btn btn-lg btn-success" onclick="startRecording(this);">
+		                        	<i class="fa fa-microphone" aria-hidden="true"></i>  Record
+		                        </button>
+		                        <button class="btn btn-lg btn-primary" onclick="stopRecording(this);" disabled>
+		                        	<i class="fa fa-bar-chart" aria-hidden="true"></i>  Analyze
+		                        </button>
+	                        </div>
 
-                        <button class="btn btn-lg btn-success" onclick="startRecording(this);">Record</button>
-                        <button class="btn btn-lg btn-danger" onclick="stopRecording(this);" disabled>Stop</button>
-						
-						<h2>Recordings</h2>
-						<ul id="recordingslist"></ul>
+	                        <!-- Analysis -->
+							<div class="well">Sentiment Analysis
+								<p id="sentiment"></p>
+								<div id="gauge-content"></div>
+						        	<%-include gauge.html%>
+								<ul class="show"></ul>	
+							</div>
 
-						<h3>Current Log Screen</h3>
-						<pre id="log" class="well"></pre>
-
-						<div class="well" style="color:#000;">Sentiment Analysis
-							<p id="sentiment"></p>
-							<ul class="show">
-								
-							</ul>	
-						</div>
+							<div>
+								<h2>Download your recordings</h2>
+								<ul id="recordingslist"></ul>
+							</div>
+						</div>					
 
 						<!-- Recording script -->
 						<script type="text/javascript">
@@ -47,6 +64,7 @@
 						        recorder && recorder.record();
 						        button.disabled = true;
 						        button.nextElementSibling.disabled = false;
+						        button.nextElementSibling.display = block;
 						        __log('Recording...');
 						    }
 
@@ -80,11 +98,12 @@
 									       var positive = data.sentiment_pos
 
 									       var show = document.querySelector(".show");
-									       var sentiment = document.querySelector("#sentiment");      
+									       var sentiment = document.querySelector("#sentiment");  
 									       var child = document.createElement("li");
-
+									       var gauge = document.querySelector(".needle")
 									       if (compound > 0) {
 									       		sentiment.innerHTML = "POSITIVE";
+									       		gauge.style.
 										       	child.innerHTML += "<li> Male: " + maleIn + "</li>" + 
 										       	"<li> Female: " + femaleIn + "</li>"
 										       show.appendChild(child)
@@ -98,7 +117,7 @@
 										       	child.innerHTML += "<li> Male: " + maleIn + "</li>" + 
 										       	"<li> Female: " + femaleIn + "</li>"
 										       show.appendChild(child);
-									       }     
+									       }
 									});
 						        });
 						    }
@@ -133,7 +152,7 @@
                                         <div id="searchbar" class="input-group input-group-lg">
                                             <input type="file" accept="image/*;capture=camera"class="form-control" name="lemonId" placeholder="Go ahead, say something. " required= "true">
                                             <span class="input-group-btn">
-                                                <input class="btn btn-success btn-default" type="submit" value="Record!">
+                                                <input class="btn btn-success" type="submit" value="Show me the results">
                                             </span>
                                         </div>                   
                                     </form>
