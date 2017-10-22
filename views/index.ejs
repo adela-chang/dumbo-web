@@ -10,6 +10,7 @@
 	                    	<!-- Log Screen -->
 							<div class="panel panel-info">
 							  	<div class="panel-heading">Plugged in and ready to record</div>
+							  	<p>current log</p>
 							    <pre id="log"></pre>
 							</div>	  
 							<!-- Make Recordings -->
@@ -92,7 +93,8 @@
 									hf.innerHTML = hf.download;
 									li.appendChild(au);
 									li.appendChild(hf);
-									recordingslist.appendChild(li);						        	
+									recordingslist.appendChild(li);
+
 						            console.log(blob)
 									$.ajax({
 									    type: 'POST',
@@ -114,7 +116,14 @@
 									       var child = document.createElement("p");
 									       var gauge = document.querySelector(".needle")
 									       var degree = compound*100;
-									       if (compound > 0) {
+
+									       if (degree > 75){
+									       		degree = 75;
+									       } else if (degree < -75){
+									       		degree = -75
+									       }
+
+									       if (compound > 30) {
 									       		sentiment.innerHTML = "POSITIVE";
 									       		gauge.style.transform = "rotate("+degree+"deg)"
 									       		if (maleIn || femaleIn){
@@ -125,7 +134,7 @@
 									       			child.style.color = "green"
 									       		}
 										       show.appendChild(child)
-									       } else if (compound<0){
+									       } else if (compound<-30){
 									       		sentiment.innerHTML = "NEGATIVE";
 									       		gauge.style.transform = "rotate("+degree+"deg)"
 									       		if (maleIn || femaleIn){
